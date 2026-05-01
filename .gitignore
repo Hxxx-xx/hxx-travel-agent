@@ -23,3 +23,8 @@ logs/
 # Temp
 *.tmp
 *.bak
+
+# Documentation (暂不提交)
+README.md
+*.md
+docs/
