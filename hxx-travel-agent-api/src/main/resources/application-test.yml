@@ -1,10 +1,12 @@
+# ============================================
 # 测试环境配置
+# ============================================
 spring:
   config:
     activate:
       on-profile: test
 
-  # 测试环境数据源配置（使用Druid连接池 - 连接MySQL测试库）
+  # 测试环境数据源（使用 Druid 连接池）
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -18,14 +20,16 @@ spring:
       validation-query: SELECT 1
       test-while-idle: true
 
-  # 测试环境Redis配置
+  # 测试环境 Redis 配置
   data:
     redis:
       host: localhost
       port: 6379
       database: 1
 
-# Redis缓存配置
+# ============================================
+# 测试环境 Redis 缓存配置
+# ============================================
 redis:
   key-prefix: hxx_travel_test
   default-ttl-seconds: 300
@@ -33,23 +37,47 @@ redis:
   map-ttl-seconds: 3600
   rag-ttl-seconds: 3600
 
+# ============================================
+# 测试环境 LLM 配置
+# ============================================
+llm:
+  api-key: test-api-key
+  base-url: ${LLM_BASE_URL:http://localhost:11434}
+  model: ${LLM_MODEL:gpt-4o-mini}
+  timeout-seconds: 30
+
+# ============================================
+# 测试环境高德地图配置
+# ============================================
+amap:
+  api-key: test-amap-key
+  enrichment-enabled: false
+
+# ============================================
+# 测试环境 RAG 配置
+# ============================================
+rag:
+  data-dir: ${RAG_DATA_DIR:src/test/data}
+  top-k: 3
+
+# ============================================
+# 测试环境 Qdrant 配置
+# ============================================
+qdrant:
+  host: ${QDRANT_HOST:localhost}
+  port: ${QDRANT_PORT:6333}
+
+# ============================================
 # 服务端口
+# ============================================
 server:
   port: 8081
 
-# 测试环境日志
+# ============================================
+# 测试环境日志级别
+# ============================================
 logging:
   level:
     root: INFO
     com.hxx.travel.agent: DEBUG
     com.hxx.travel.agent.service: TRACE
-
-# 测试环境LLM配置
-llm:
-  api-key: test-api-key
-  model: gpt-4o-mini
-
-# 测试环境高德地图配置
-amap:
-  api-key: test-amap-key
-  enrichment-enabled: false

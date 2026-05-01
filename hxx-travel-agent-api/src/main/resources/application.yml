@@ -1,16 +1,21 @@
-# 主配置文件 - 抽离公共配置
+# ============================================
+# 主配置文件 - 公共配置
+# ============================================
+
 spring:
   application:
     name: hxx-travel-agent
 
-  # Jackson配置
+  # Jackson 公共配置
   jackson:
     date-format: yyyy-MM-dd
     time-zone: Asia/Shanghai
     serialization:
       write-dates-as-timestamps: false
 
-# MyBatis-Plus配置
+# ============================================
+# MyBatis-Plus 公共配置
+# ============================================
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
   type-aliases-package: com.hxx.travel.agent.entity
@@ -24,41 +29,50 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
 
-# LLM配置
+# ============================================
+# LLM 默认配置（各环境覆盖）
+# ============================================
 llm:
   api-key: ${LLM_API_KEY:}
   base-url: ${LLM_BASE_URL:}
   model: ${LLM_MODEL:gpt-4o-mini}
-  timeout-seconds: 60
+  timeout-seconds: ${LLM_TIMEOUT:60}
 
-# 高德地图配置
+# ============================================
+# 高德地图 默认配置（各环境覆盖）
+# ============================================
 amap:
   api-key: ${AMAP_API_KEY:}
   base-url: https://restapi.amap.com/v3
-  default-city: ""
-  timeout-seconds: 20
-  enrichment-enabled: false
+  default-city: ${AMAP_DEFAULT_CITY:}
+  timeout-seconds: ${AMAP_TIMEOUT:20}
+  enrichment-enabled: ${AMAP_ENRICHMENT_ENABLED:false}
 
-# RAG配置
+# ============================================
+# RAG 默认配置（各环境覆盖）
+# ============================================
 rag:
-  data-dir: data
-  top-k: 5
-  cache-ttl-seconds: 21600
+  data-dir: ${RAG_DATA_DIR:data}
+  top-k: ${RAG_TOP_K:5}
+  cache-ttl-seconds: ${RAG_CACHE_TTL:21600}
 
-# Qdrant配置
+# ============================================
+# Qdrant 默认配置（各环境覆盖）
+# ============================================
 qdrant:
-  host: localhost
-  port: 6333
-  collection-name: travel_guides
+  host: ${QDRANT_HOST:localhost}
+  port: ${QDRANT_PORT:6333}
+  collection-name: ${QDRANT_COLLECTION:travel_guides}
 
-# Sa-Token配置（预留）
+# ============================================
+# Sa-Token 配置（预留）
+# ============================================
 sa-token:
-  enabled: false
+  enabled: ${SA_TOKEN_ENABLED:false}
 
-# 日志配置
+# ============================================
+# 公共日志配置
+# ============================================
 logging:
-  level:
-    root: INFO
-    com.hxx.travel.agent: DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

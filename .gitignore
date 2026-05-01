@@ -28,3 +28,6 @@ logs/
 README.md
 *.md
 docs/
+
+# SQL scripts (暂不提交)
+sql/
