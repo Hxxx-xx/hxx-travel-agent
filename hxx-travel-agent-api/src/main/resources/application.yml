@@ -1,0 +1,64 @@
+# 主配置文件 - 抽离公共配置
+spring:
+  application:
+    name: hxx-travel-agent
+
+  # Jackson配置
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: Asia/Shanghai
+    serialization:
+      write-dates-as-timestamps: false
+
+# MyBatis-Plus配置
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.hxx.travel.agent.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# LLM配置
+llm:
+  api-key: ${LLM_API_KEY:}
+  base-url: ${LLM_BASE_URL:}
+  model: ${LLM_MODEL:gpt-4o-mini}
+  timeout-seconds: 60
+
+# 高德地图配置
+amap:
+  api-key: ${AMAP_API_KEY:}
+  base-url: https://restapi.amap.com/v3
+  default-city: ""
+  timeout-seconds: 20
+  enrichment-enabled: false
+
+# RAG配置
+rag:
+  data-dir: data
+  top-k: 5
+  cache-ttl-seconds: 21600
+
+# Qdrant配置
+qdrant:
+  host: localhost
+  port: 6333
+  collection-name: travel_guides
+
+# Sa-Token配置（预留）
+sa-token:
+  enabled: false
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.hxx.travel.agent: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
