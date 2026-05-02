@@ -10,6 +10,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
  * 通用配置
+ *
+ * @author hxx
  */
 @Configuration
 public class CommonConfig {

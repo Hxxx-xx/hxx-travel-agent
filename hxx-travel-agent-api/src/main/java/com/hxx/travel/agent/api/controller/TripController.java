@@ -1,9 +1,9 @@
 package com.hxx.travel.agent.api.controller;
 
 import com.hxx.travel.agent.common.result.ApiResponse;
-import com.hxx.travel.agent.dto.*;
-import com.hxx.travel.agent.service.StorageService;
-import com.hxx.travel.agent.service.TripService;
+import com.hxx.travel.agent.trip.model.*;
+import com.hxx.travel.agent.trip.service.StorageService;
+import com.hxx.travel.agent.trip.service.TripService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +14,8 @@ import java.util.Map;
 
 /**
  * 行程相关接口
+ *
+ * @author hxx
  */
 @Slf4j
 @RestController

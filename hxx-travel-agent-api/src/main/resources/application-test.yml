@@ -28,14 +28,11 @@ spring:
       database: 1
 
 # ============================================
-# 测试环境 Redis 缓存配置
+# MyBatis-Plus 测试环境配置
 # ============================================
-redis:
-  key-prefix: hxx_travel_test
-  default-ttl-seconds: 300
-  weather-ttl-seconds: 300
-  map-ttl-seconds: 3600
-  rag-ttl-seconds: 3600
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 # ============================================
 # 测试环境 LLM 配置
@@ -51,6 +48,9 @@ llm:
 # ============================================
 amap:
   api-key: test-amap-key
+  base-url: https://restapi.amap.com/v3
+  default-city: ${AMAP_DEFAULT_CITY:}
+  timeout-seconds: 10
   enrichment-enabled: false
 
 # ============================================
@@ -59,6 +59,7 @@ amap:
 rag:
   data-dir: ${RAG_DATA_DIR:src/test/data}
   top-k: 3
+  cache-ttl-seconds: 3600
 
 # ============================================
 # 测试环境 Qdrant 配置
@@ -66,12 +67,29 @@ rag:
 qdrant:
   host: ${QDRANT_HOST:localhost}
   port: ${QDRANT_PORT:6333}
+  collection-name: ${QDRANT_COLLECTION:travel_guides}
+
+# ============================================
+# Redis 缓存配置（测试环境）
+# ============================================
+redis:
+  key-prefix: hxx_travel_test
+  default-ttl-seconds: 300
+  weather-ttl-seconds: 300
+  map-ttl-seconds: 3600
+  rag-ttl-seconds: 3600
+
+# ============================================
+# Sa-Token 配置（预留）
+# ============================================
+sa-token:
+  enabled: false
 
 # ============================================
 # 服务端口
 # ============================================
 server:
-  port: 8081
+  port: 2000
 
 # ============================================
 # 测试环境日志级别
@@ -80,4 +98,4 @@ logging:
   level:
     root: INFO
     com.hxx.travel.agent: DEBUG
-    com.hxx.travel.agent.service: TRACE
+    com.hxx.travel.agent.trip.service: TRACE

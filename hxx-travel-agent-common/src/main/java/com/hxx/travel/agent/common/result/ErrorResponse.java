@@ -3,6 +3,12 @@ package com.hxx.travel.agent.common.result;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
+/**
+ * 错误响应
+ * 用于异常时的错误信息封装
+ *
+ * @author hxx
+ */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorResponse {

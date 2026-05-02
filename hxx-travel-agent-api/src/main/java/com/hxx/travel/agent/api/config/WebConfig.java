@@ -8,6 +8,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * Web配置
+ *
+ * @author hxx
  */
 @Configuration
 @ComponentScan(basePackages = "com.hxx.travel.agent", excludeFilters = {

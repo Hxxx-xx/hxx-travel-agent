@@ -1,10 +1,14 @@
 # ============================================
-# 主配置文件 - 公共配置
+# 主配置文件 - 仅包含公共配置和默认值
 # ============================================
 
 spring:
   application:
     name: hxx-travel-agent
+
+  # 默认激活开发环境
+  profiles:
+    active: dev
 
   # Jackson 公共配置
   jackson:
@@ -14,64 +18,19 @@ spring:
       write-dates-as-timestamps: false
 
 # ============================================
-# MyBatis-Plus 公共配置
+# MyBatis-Plus 框架配置
 # ============================================
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
-  type-aliases-package: com.hxx.travel.agent.entity
+  type-aliases-package: com.hxx.travel.agent.trip.entity
   configuration:
     map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:
       id-type: auto
-      logic-delete-field: deleted
-      logic-delete-value: 1
-      logic-not-delete-value: 0
 
 # ============================================
-# LLM 默认配置（各环境覆盖）
-# ============================================
-llm:
-  api-key: ${LLM_API_KEY:}
-  base-url: ${LLM_BASE_URL:}
-  model: ${LLM_MODEL:gpt-4o-mini}
-  timeout-seconds: ${LLM_TIMEOUT:60}
-
-# ============================================
-# 高德地图 默认配置（各环境覆盖）
-# ============================================
-amap:
-  api-key: ${AMAP_API_KEY:}
-  base-url: https://restapi.amap.com/v3
-  default-city: ${AMAP_DEFAULT_CITY:}
-  timeout-seconds: ${AMAP_TIMEOUT:20}
-  enrichment-enabled: ${AMAP_ENRICHMENT_ENABLED:false}
-
-# ============================================
-# RAG 默认配置（各环境覆盖）
-# ============================================
-rag:
-  data-dir: ${RAG_DATA_DIR:data}
-  top-k: ${RAG_TOP_K:5}
-  cache-ttl-seconds: ${RAG_CACHE_TTL:21600}
-
-# ============================================
-# Qdrant 默认配置（各环境覆盖）
-# ============================================
-qdrant:
-  host: ${QDRANT_HOST:localhost}
-  port: ${QDRANT_PORT:6333}
-  collection-name: ${QDRANT_COLLECTION:travel_guides}
-
-# ============================================
-# Sa-Token 配置（预留）
-# ============================================
-sa-token:
-  enabled: ${SA_TOKEN_ENABLED:false}
-
-# ============================================
-# 公共日志配置
+# 公共日志格式（级别在各环境配置）
 # ============================================
 logging:
   pattern:

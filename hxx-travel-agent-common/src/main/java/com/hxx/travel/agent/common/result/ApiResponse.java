@@ -4,6 +4,12 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * 统一 API 响应封装
+ * 所有接口返回值统一使用此格式
+ *
+ * @author hxx
+ */
 @Data
 public class ApiResponse<T> implements Serializable {
 

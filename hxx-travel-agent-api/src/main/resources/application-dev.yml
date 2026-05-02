@@ -1,12 +1,12 @@
 # ============================================
-# 开发环境配置
+# 开发环境配置 - 开箱即用，localhost 默认配置
 # ============================================
 spring:
-  config:
-    activate:
-      on-profile: dev
+  # 自动包含本地配置（覆盖敏感信息）
+  profiles:
+    include: local
 
-  # 开发环境数据源（使用 Druid 连接池）
+  # 数据源（localhost 默认）
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -17,93 +17,25 @@ spring:
       initial-size: 5
       min-idle: 5
       max-active: 20
-      max-wait: 60000
-      time-between-eviction-runs-millis: 60000
-      min-evictable-idle-time-millis: 300000
-      validation-query: SELECT 1
-      test-while-idle: true
-      test-on-borrow: false
-      test-on-return: false
-      pool-prepared-statements: true
-      max-pool-prepared-statement-per-connection-size: 20
-      filters: stat,wall
-      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-      web-stat-filter:
-        enabled: true
-        url-pattern: /*
-        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
-      stat-view-servlet:
-        enabled: true
-        url-pattern: /druid/*
-        reset-enable: false
-        login-username: admin
-        login-password: admin
 
-  # 开发环境 Redis 配置
+  # Redis（localhost 默认）
   data:
     redis:
       host: localhost
       port: 6379
       database: 0
-      timeout: 10s
-      lettuce:
-        pool:
-          max-active: 8
-          max-idle: 8
-          min-idle: 0
-          max-wait: -1ms
 
-# ============================================
-# 开发环境 Redis 缓存配置
-# ============================================
-redis:
-  key-prefix: hxx_travel_dev
-  default-ttl-seconds: 1800
-  weather-ttl-seconds: 1800
-  map-ttl-seconds: 86400
-  rag-ttl-seconds: 21600
+# MyBatis-Plus
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-# ============================================
-# 开发环境 LLM 配置
-# ============================================
-llm:
-  api-key: ${LLM_API_KEY:dev-key}
-  base-url: ${LLM_BASE_URL:http://localhost:11434}
-  model: ${LLM_MODEL:gpt-4o-mini}
-
-# ============================================
-# 开发环境高德地图配置
-# ============================================
-amap:
-  api-key: ${AMAP_API_KEY:dev-amap-key}
-  enrichment-enabled: false
-
-# ============================================
-# 开发环境 RAG 配置
-# ============================================
-rag:
-  data-dir: ${RAG_DATA_DIR:data}
-  top-k: 5
-
-# ============================================
-# 开发环境 Qdrant 配置
-# ============================================
-qdrant:
-  host: ${QDRANT_HOST:localhost}
-  port: ${QDRANT_PORT:6333}
-
-# ============================================
 # 服务端口
-# ============================================
 server:
   port: 8080
 
-# ============================================
-# 开发环境日志级别
-# ============================================
+# 日志级别
 logging:
   level:
     root: INFO
     com.hxx.travel.agent: DEBUG
-    com.baomidou.mybatisplus: DEBUG
-    com.alibaba.druid: DEBUG

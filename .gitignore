@@ -31,3 +31,6 @@ docs/
 
 # SQL scripts (暂不提交)
 sql/
+
+# Local configuration (敏感配置不上传)
+application-local.yml

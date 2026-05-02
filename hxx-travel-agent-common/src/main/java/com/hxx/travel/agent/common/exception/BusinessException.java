@@ -1,5 +1,11 @@
 package com.hxx.travel.agent.common.exception;
 
+/**
+ * 业务异常
+ * 用于处理业务逻辑中产生的可预知异常
+ *
+ * @author hxx
+ */
 public class BusinessException extends RuntimeException {
 
     private final String code;

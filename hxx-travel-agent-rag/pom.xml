@@ -14,14 +14,18 @@
     <name>hxx-travel-agent-rag</name>
     <description>RAG vector retrieval module</description>
 
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>com.hxx</groupId>
             <artifactId>hxx-travel-agent-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.hxx</groupId>
-            <artifactId>hxx-travel-agent-dto</artifactId>
         </dependency>
 
         <dependency>
@@ -38,7 +42,7 @@
         <!-- Qdrant client -->
         <dependency>
             <groupId>io.qdrant</groupId>
-            <artifactId>qdrant-client</artifactId>
+            <artifactId>client</artifactId>
         </dependency>
 
         <!-- LangChain4j -->

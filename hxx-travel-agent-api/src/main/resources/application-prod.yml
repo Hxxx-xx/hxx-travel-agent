@@ -49,14 +49,11 @@ spring:
           max-wait: 3000ms
 
 # ============================================
-# 生产环境 Redis 缓存配置
+# MyBatis-Plus 生产环境配置
 # ============================================
-redis:
-  key-prefix: hxx_travel_prod
-  default-ttl-seconds: 3600
-  weather-ttl-seconds: 3600
-  map-ttl-seconds: 86400
-  rag-ttl-seconds: 43200
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.nolog.NoLoggingImpl
 
 # ============================================
 # 生产环境 LLM 配置
@@ -72,6 +69,9 @@ llm:
 # ============================================
 amap:
   api-key: ${AMAP_API_KEY:}
+  base-url: https://restapi.amap.com/v3
+  default-city: ${AMAP_DEFAULT_CITY:}
+  timeout-seconds: ${AMAP_TIMEOUT:20}
   enrichment-enabled: ${AMAP_ENRICHMENT_ENABLED:false}
 
 # ============================================
@@ -80,6 +80,7 @@ amap:
 rag:
   data-dir: ${RAG_DATA_DIR:/data}
   top-k: ${RAG_TOP_K:5}
+  cache-ttl-seconds: ${RAG_CACHE_TTL:43200}
 
 # ============================================
 # 生产环境 Qdrant 配置
@@ -87,12 +88,29 @@ rag:
 qdrant:
   host: ${QDRANT_HOST:localhost}
   port: ${QDRANT_PORT:6333}
+  collection-name: ${QDRANT_COLLECTION:travel_guides}
+
+# ============================================
+# Redis 缓存配置（生产环境）
+# ============================================
+redis:
+  key-prefix: hxx_travel_prod
+  default-ttl-seconds: ${REDIS_DEFAULT_TTL:3600}
+  weather-ttl-seconds: ${REDIS_WEATHER_TTL:3600}
+  map-ttl-seconds: ${REDIS_MAP_TTL:86400}
+  rag-ttl-seconds: ${REDIS_RAG_TTL:43200}
+
+# ============================================
+# Sa-Token 配置（预留）
+# ============================================
+sa-token:
+  enabled: ${SA_TOKEN_ENABLED:false}
 
 # ============================================
 # 服务端口
 # ============================================
 server:
-  port: ${SERVER_PORT:8080}
+  port: ${SERVER_PORT:9000}
   shutdown: graceful
   tomcat:
     threads:
